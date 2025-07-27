@@ -1,4 +1,4 @@
-declare module 'jaxcore-say' {
-    const say: any;
-    export default say;
-}
+// declare module 'jaxcore-say' {
+//     const say: any;
+//     export default say;
+// }
