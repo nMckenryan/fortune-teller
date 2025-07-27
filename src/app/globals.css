@@ -2,10 +2,20 @@
 
 @font-face {
   font-family: 'Moonveil Stellarion';
-  src: url('/public//fonts//MoonveilStellarion-PersonalUse.ttf') format('truetype');
-  font-weight: normal;
+  src: url('/fonts/MoonveilStellarion-PersonalUse.ttf') format('truetype');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
+  font-feature-settings: 'liga' off;
+}
+
+@font-face {
+  font-family: 'Night Wicked';
+  src: url('/fonts/Night Wicked DEMO.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  font-feature-settings: 'liga' off;
 }
 
 :root {

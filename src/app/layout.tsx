@@ -26,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="min-h-screen bg-gradient-to-b from-purple-900 to-indigo-900 text-white">
-        <div className="container mx-auto px-4 py-8 flex flex-col min-h-screen">
+        <div className="container mx-auto px-4 py-4 flex flex-col min-h-screen">
           <header className="mb-8 text-center">
             <h1
-              className="text-4xl font-bold mb-2 font-moonveil"
+              className="text-4xl font-bold mb-2"
               style={{ fontFamily: "'Moonveil Stellarion', sans-serif" }}
             >
               Zaranian The Diviner
@@ -39,16 +39,16 @@ export default function RootLayout({
 
           <main className="flex-grow">{children}</main>
 
-          <footer className="mt-12 text-center text-sm text-purple-300">
-            <p>
+          <footer className=" text-center text-sm text-purple-300">
+            <p style={{ fontFamily: "'Moonveil Stellarion', sans-serif" }}>
               {new Date().getFullYear()} Zaranian The Diviner. All fortunes are
               for entertainment purposes only.{" "}
-              <Link
+              {/* <Link
                 className="text-purple-200 font-bold"
                 href="https://github.com/nmckenryan/fortune-teller"
               >
                 Built by nmckenryan
-              </Link>
+              </Link> */}
             </p>
           </footer>
         </div>

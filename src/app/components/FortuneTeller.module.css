@@ -15,7 +15,6 @@
 }
 
 .gem {
-  
   aspect-ratio: 1;
   --o:calc(50%*tan(-22.5deg));
   clip-path: polygon(
@@ -39,7 +38,7 @@
   width: 250px;
   height: 250px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #ffffff, #a8d8ea);
+  background: radial-gradient(circle at 30% 30%, #e4dbff, #a8d8ea);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,6 +47,8 @@
   box-shadow: 0 0 30px rgba(168, 216, 234, 0.3);
   transition: all 0.3s ease;
   overflow: hidden;
+  bottom: 50px;
+  z-index: 12;
 }
 
 .glowing {
@@ -63,7 +64,7 @@
 
 
 @keyframes pulse {
-  from { opacity: 0.7; transform: scale(1); }
+  from { opacity: 0.9; transform: scale(1); }
   to { opacity: 1; transform: scale(1.2); }
 }
 
@@ -95,7 +96,7 @@
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-5px); }
 }
 
 .character {
@@ -127,7 +128,7 @@
 .thirdEye {
   width: 20px;
   height: 10px;
-  background: #ffffff;
+  background: linear-gradient(to bottom, #ffffff 0%, #fee6e6 100%);
   border-radius: 50%;
   position: relative;
   z-index: 5;
@@ -149,16 +150,6 @@
 
 
 
-.eye {
-  width: 25px;
-  height: 20px;
-  background: #ffffff;
-  border-radius: 50%;
-  position: relative;
-  animation: blink 5s infinite;
-  transition: all 0.3s ease;
-}
-
 .thinking .eye {
   height: 2px;
   margin-top: 9px;
@@ -166,7 +157,7 @@
 }
 
 .iris {
-  border: 2px solid #2cbbce;
+  border: 1.7px solid cornflowerblue;
   width: 14px;
   height: 12px;
   background: black;
@@ -176,6 +167,25 @@
   left: 6px;
   opacity: 1;
   transition: opacity 0.3s ease;
+  animation: irisShift 60s infinite alternate ease-in-out;
+}
+
+@keyframes irisShift {
+  0% {
+    transform: translateX(2px) translateY(2px);
+  }
+  25% {
+    transform: translateX(-2px) translateY(2px);
+  }
+  50% {
+    transform: translateX(2px) translateY(-2px);
+  }
+  75% {
+    transform: translateX(-2px) translateY(-2px);
+  }
+  100% {
+    transform: translateX(2px) translateY(2px);
+  }
 }
 
 .thinking .iris {
@@ -221,14 +231,34 @@
 .eye {
   position: relative;
   width: 25px;
-  height: 20px;
-  background: #ffffff;
+  height: 25px;
+  background: linear-gradient(to bottom, #ffffff 0%, #fee6e6 100%);
   border-radius: 50%;
-  box-shadow: 0 0 5px rgba(50, 0, 0, 1.5);
+  box-shadow: 0 0 5px rgba(70, 0, 0, 1.5);
   overflow: hidden; /* Keep iris contained */
+  animation: blink 5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+  animation-delay: 2s; /* Initial delay before first blink */
 }
 
-/* Hide iris when eye is closed */
+@keyframes blink {
+  0%, 96% {
+    height: 25px;
+    transform: translateY(0);
+  }
+  98% {
+    height: 2px;
+    transform: translateY(9px);
+  }
+  100% {
+    height: 25px;
+    transform: translateY(0);
+  }
+}
+
+.eyes {
+  transition: all 0.3s ease;
+}
+
 .eye:has(> .iris) {
   overflow: hidden;
 }
@@ -294,7 +324,7 @@
 .shawl {
   position: absolute;
   width: 85px;
-  height: 110px;
+  height: 210px;
   background: #4b0082;
   border-radius: 20px 20px 0 0;
   top: 80px;
