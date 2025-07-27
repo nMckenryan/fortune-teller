@@ -11,7 +11,5 @@ const VoiceBox = new Say({
 });
 
 export default function VoiceBoxSays(text: string) {
-    VoiceBox.say(text).then(function () {
-        console.log("done");
-    });
+    VoiceBox.say(text);
 }
