@@ -14,6 +14,27 @@
   width: 100%;
 }
 
+.gem {
+  
+  aspect-ratio: 1;
+  --o:calc(50%*tan(-22.5deg));
+  clip-path: polygon(
+    var(--o) 50%,50% var(--o),
+    calc(100% - var(--o)) 50%,
+    50% calc(100% - var(--o))
+  );
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  left: 75px;
+  top: 42px;
+  z-index: 3;
+  border: 1px solid darkgreen;
+  background: radial-gradient(circle at 30% 30%, cyan, green);
+}
+
+
 .crystalBall {
   width: 250px;
   height: 250px;
@@ -39,6 +60,18 @@
   50% { box-shadow: 0 0 60px rgba(168, 216, 234, 0.9); }
   100% { box-shadow: 0 0 30px rgba(168, 216, 234, 0.7); }
 }
+
+
+@keyframes pulse {
+  from { opacity: 0.7; transform: scale(1); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 5px #00ff00; }
+  to { box-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+}
+
 
 .fortuneText {
   text-align: center;
@@ -76,8 +109,10 @@
   position: absolute;
   width: 80px;
   height: 100px;
-  background: #ffdbac;
-  border-radius: 80% 80% 50% 50% / 60% 60% 40% 40%;
+  background: #fdffeb;
+  clip-path: polygon(50% 0, 100% 50%, 50% 200%, 0 50%);
+  border-bottom-left-radius: 43%;
+  border-bottom-right-radius: 45%;
   top: 60px;
   left: 50px;
   z-index: 2;
@@ -86,70 +121,184 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  box-shadow: 0px 15px 0px 0px #8b0000 inset;
 }
 
-.eyes {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 10px;
-  margin-top: 20px;
+.thirdEye {
+  width: 20px;
+  height: 10px;
+  background: #ffffff;
+  border-radius: 50%;
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 0 5px rgba(50, 0, 0, 1.5);
 }
+
+.thirdEyeIris {
+  border: 2px solid green;
+  width: 10px;
+  height: 7px;
+  background: black;
+  border-radius: 50%;
+  position: relative;
+  top: 2px;
+  left: 5.45px;
+  opacity: 1;
+  z-index: 6;
+}
+
+
 
 .eye {
-  width: 20px;
+  width: 25px;
   height: 20px;
-  background: #1e1a2e;
+  background: #ffffff;
   border-radius: 50%;
   position: relative;
   animation: blink 5s infinite;
+  transition: all 0.3s ease;
+}
+
+.thinking .eye {
+  height: 2px;
+  margin-top: 9px;
+  animation: none;
+}
+
+.iris {
+  border: 2px solid #2cbbce;
+  width: 14px;
+  height: 12px;
+  background: black;
+  border-radius: 50%;
+  position: relative;
+  top: 5px;
+  left: 6px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.thinking .iris {
+  opacity: 0;
+  animation: none;
+}
+
+.thinking .thirdEye {
+  animation: pulse 2s infinite alternate;
+}
+
+.thinking .thirdEyeIris {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes irisBlink {
+  0%, 100%, 5%, 95% { opacity: 1; }
+  1%, 99% { opacity: 0; }
 }
 
 @keyframes blink {
-  0%, 100% { height: 20px; margin-top: 0; }
-  1%, 99% { height: 2px; margin-top: 9px; }
-  2%, 98% { height: 20px; margin-top: 0; }
+  2%, 98% { 
+    height: 2px;
+    transform: translateY(9px);
+  }
+  4%, 96% { 
+    height: 25px;
+    transform: translateY(0);
+  }
+}
+
+/* Eyes container with fixed dimensions */
+.eyes {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between eyes */
+  margin-top: 10px;
+  min-height: 25px; /* Match the height of the eye */
+  position: relative;
+  width: 100%;
+}
+
+.eye {
+  position: relative;
+  width: 25px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(50, 0, 0, 1.5);
+  overflow: hidden; /* Keep iris contained */
+}
+
+/* Hide iris when eye is closed */
+.eye:has(> .iris) {
+  overflow: hidden;
 }
 
 
 .mouth {
-  width: 40px;
-  height: 15px;
+  width: 30px;
+  height: 20px;
   border-bottom: 3px solid #1a1a2e;
-  border-radius: 0 0 5px 5px;
+  border-radius: 0 0 1px 2px;
   transition: all 0.3s ease;
 }
 
 .talking .mouth {
-  height: 10px;
-  border-radius: 0;
-  border-bottom: 3px solid #1a1a2e;
-  animation: talk 0.5s infinite alternate;
+  width: 20px;
+  height: 30px;
+  border: 3px solid #1a1a2e;
+  border-radius: 50%;
+  animation: talk 0.3s infinite alternate;
+  margin-top: 7px;
+  background: #1a1a2e;
 }
 
 @keyframes talk {
-  0% { width: 30px; }
-  100% { width: 40px; }
+  0% { 
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-bottom: 0;
+  }
+  100% { 
+    width: 25px;
+    height: 15px;
+    border-radius: 50% 50% 10% 10% / 60% 60% 40% 40%;
+    margin-bottom: 5px;
+  }
 }
 
 .headscarf {
   position: absolute;
-  width: 180px;
-  height: 100px;
+  width: 150px;
+  height: 120px;
   background: #8b0000;
-  border-radius: 50% 50% 25% 25% / 100%;
-  top: 0;
+  border: 1px solid #8b0000;
+  border-radius: 100%;
+  top: -5px;
+  left: 15px;
+  z-index: 1;
+}
+
+.backscarf {
+  transform: rotate(224deg);
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: #8b0000;
+  border-radius: 120px 0 0 0;
+  top: 79px;
+  right: 55px;
   z-index: 1;
 }
 
 .shawl {
   position: absolute;
-  width: 160px;
+  width: 85px;
   height: 110px;
   background: #4b0082;
   border-radius: 20px 20px 0 0;
   top: 80px;
-  left: 10px;
+  left: 47.5px;
   z-index: 0;
 }
 

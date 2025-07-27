@@ -9,25 +9,38 @@ const FortuneTeller = () => {
   const [isThinking, setIsThinking] = useState(false);
 
   const fortunes: string[] = [
-    "The future belongs to those who believe in the beauty of their dreams.",
-    "The only limit to our realization of tomorrow is our doubts of today.",
-    "The best way to predict the future is to invent it.",
-    "The future is not something to fear, it is something to create.",
-    "The future is not something to be predicted, it is something to be created.",
+    "I feel Sick",
+    "KI KO HO",
+    "You will die",
+    "A new adventure awaits you",
+    "Good things are coming your way",
+    "A surprise is heading your direction",
+    "A change is coming your way",
+    "Expect a surprise in your life",
+    "A new opportunity is arising",
+    "A good time is ahead",
+    "Good news is coming your way",
+    "Something exciting is happening soon",
+    "A new journey is beginning",
   ];
+
+  //3 words = 1 second for each word.
+  const convertWordsToSeconds = (words: string) => {
+    const wordSplit: string[] = words.split(" ");
+    const seconds = Math.ceil(wordSplit.length / 3);
+    return seconds * 1000;
+  };
 
   const getRandomFortune = () => {
     setIsThinking(true);
-    setIsTalking(true);
-
     setTimeout(() => {
       const randomIndex = Math.floor(Math.random() * fortunes.length);
       const selected = fortunes[randomIndex];
       setFortune(selected);
       setIsThinking(false);
-      setIsTalking(true);
       VoiceBoxSays(selected);
-      setIsTalking(false);
+      setIsTalking(true);
+      setTimeout(() => setIsTalking(false), convertWordsToSeconds(selected));
     }, 1000);
   };
 
@@ -53,15 +66,26 @@ const FortuneTeller = () => {
           )}
         </div>
 
-        <div className={styles.character}>
+        <div
+          className={`${styles.character} ${isThinking ? styles.thinking : ""}`}
+        >
           <div className={`${styles.face} ${isTalking ? styles.talking : ""}`}>
+            <div className={styles.thirdEye}>
+              <div className={styles.thirdEyeIris}></div>
+            </div>
             <div className={styles.eyes}>
-              <div className={styles.eye}></div>
-              <div className={styles.eye}></div>
+              <div className={styles.eye}>
+                <div className={styles.iris}></div>
+              </div>
+              <div className={styles.eye}>
+                <div className={styles.iris}></div>
+              </div>
             </div>
             <div className={styles.mouth}></div>
           </div>
           <div className={styles.headscarf}></div>
+          <div className={styles.gem}></div>
+          <div className={styles.backscarf}></div>
           <div className={styles.shawl}></div>
         </div>
 
